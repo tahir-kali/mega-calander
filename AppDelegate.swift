@@ -1,8 +1,8 @@
 //
-//  
-//  mega-calander
+//  AppDelegate.swift
+//  MegaCalendar
 //
-//  Created by Tahir Rahimi 21 April, 2023
+//  Created by Mohammad Tahir on 21.04.23.
 //
 
 import UIKit

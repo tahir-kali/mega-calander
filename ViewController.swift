@@ -1,112 +1,39 @@
 //
-//  
-//  mega-calander
+//  ViewController.swift
+//  MegaCalendar
 //
-//  Created by Tahir Rahimi 21 April, 2023
+//  Created by Mohammad Tahir on 21.04.23.
 //
 
 import UIKit
+import SnapKit
 
-struct CalData {
-    var day: String
-    var date: Date?
-    var data: Any?
-}
+final class ViewController: UIViewController {
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
-{
-    @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    private lazy var button = UIButton()
     
-    var selectedDate = Date()
-    var totalSquares = [CalData]()
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        setCellsView()
-        setMonthView()
+        setupViews()
+        setConstraints()
+    }
+    func setupViews() {
+        view.addSubview(button)
+        button.setTitle("Show Calendar", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor(red: 250, green: 250, blue: 250, alpha: 1.0)
+        button.addTarget(self, action: #selector(showCalendar), for: .touchUpInside)
     }
     
-    func setCellsView()
-    {
-        let width = (collectionView.frame.size.width - 2) / 7
-        let height = (collectionView.frame.size.height - 2) / 7
-        
-        let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        flowLayout.itemSize = CGSize(width: width, height: height)
-    }
-    
-    func setMonthView()
-    {
-        totalSquares.removeAll()
-        
-        let daysInMonth = selectedDate.daysInMonth
-        let firstDayOfMonth = selectedDate.firstOfMonth
-        let startingSpaces = firstDayOfMonth.weekDay
-        
-        var count: Int = 1
-        
-        let monthYear = selectedDate.monthString + " " + selectedDate.yearString
-        
-        while(count <= 42)
-        {
-            if(count <= startingSpaces || count - startingSpaces > daysInMonth)
-            {
-                totalSquares.append(CalData(day: ""))
-            }
-            else
-            {
-                let day = String(count - startingSpaces)
-                let strDate = day + " " + monthYear
-                totalSquares.append(CalData(day: day, date: strDate.date))
-            }
-            count += 1
+    func setConstraints() {
+        button.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
-        
-        monthLabel.text = selectedDate.monthString + " " + selectedDate.yearString
-        collectionView.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        totalSquares.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calCell", for: indexPath) as! CalendarCell
-        
-        let data = totalSquares[indexPath.item]
-        cell.dayOfMonth.text = data.day
-        if let date = data.date, Calendar.current.isDateInToday(date) {
-            cell.dayOfMonth.textColor = .blue
-        } else {
-            cell.dayOfMonth.textColor = .black
-        }
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = totalSquares[indexPath.item]
-        guard let date = data.date else { return }
-        print(date.dayString)
-    }
-    
-    @IBAction func previousMonth(_ sender: Any)
-    {
-        selectedDate = selectedDate.minusMonth
-        setMonthView()
-    }
-    
-    @IBAction func nextMonth(_ sender: Any)
-    {
-        selectedDate = selectedDate.plusMonth
-        setMonthView()
-    }
-    
-    override open var shouldAutorotate: Bool
-    {
-        return false
+    @objc
+    private func showCalendar() {
+        let vc = CalendarViewController()
+        navigationController?.present(vc, animated: true)
     }
 }
-
