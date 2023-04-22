@@ -1,0 +1,6 @@
+framework module Pods_mega_calendarTests {
+  umbrella header "Pods-mega-calendarTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
