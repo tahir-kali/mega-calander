@@ -158,15 +158,19 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        
         if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
             cell.title = "\(allDates[datesCounter].get(.day))"
             if currentDate!.endOfMonth() == allDates[datesCounter] {
                 currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
             }
             datesCounter += 1
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
+            
         } else {
             cell.title = ""
         }
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -186,6 +190,18 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             return CGSize(width: collectionView.frame.width, height: 60)
         }
     }
+    @objc
+    func tap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: location)
+       
+            
+        let cell = self.collectionView.cellForItem(at: indexPath!)
+        cell?.backgroundColor = UIColor.systemIndigo
+        cell?.layer.cornerRadius = 10
+        
+    }
+
 }
 
 extension Calendar {
