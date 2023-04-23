@@ -14,7 +14,6 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     
     private let titleLabel = UILabel()
-
     var title: String? {
         didSet {
             guard let title = title else { return }
@@ -22,11 +21,6 @@ final class CollectionViewCell: UICollectionViewCell {
             if(title=="СБ"||title=="ВС"){
                 titleLabel.textColor = UIColor.red
             }
-        }
-    }
-    var clicked: Bool? {
-        didSet {
-            guard let clicked = clicked else { return }
         }
     }
     
@@ -43,9 +37,6 @@ final class CollectionViewCell: UICollectionViewCell {
     func setupView() {
         contentView.addSubview(titleLabel)
         titleLabel.textAlignment = .center
-        if(clicked == true){
-            titleLabel.textColor = UIColor.white
-        }
         titleLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

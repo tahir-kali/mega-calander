@@ -154,7 +154,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         if collectionView == weekDaysCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
             cell.title = weekdays[indexPath.row]
-            
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
@@ -198,7 +197,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
         let cell = self.collectionView.cellForItem(at: indexPath!)
         cell?.backgroundColor = UIColor.systemIndigo
-        cell?.layer.cornerRadius = 10
+        cell?.layer.cornerRadius = 20
         
     }
 
