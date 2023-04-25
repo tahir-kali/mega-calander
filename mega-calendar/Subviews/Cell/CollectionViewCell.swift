@@ -13,14 +13,19 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     
     private let titleLabel = UILabel()
+    private var sentData: [String] =  ["","","",""]
     var data: [String]? {
         didSet {
             guard let data = data else { return }
             // 0 for title 1 for currentDate 2 for startDate 3 for endDate
             titleLabel.text = data[0]
+            sentData = data
             if(data[0]=="СБ"||data[0]=="ВС"){
                 titleLabel.textColor = UIColor.red
+            }else{
+                formatCells(data: data)
             }
+            
         }
     }
    
@@ -35,35 +40,57 @@ final class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-   func setupView() {
-    contentView.addSubview(titleLabel)
-    titleLabel.textAlignment = .center
-    titleLabel.snp.makeConstraints {
-        $0.edges.equalToSuperview()
-    }
-    
-    let currentDate = data?[1]
-    let startDate = data?[2]
-    let endDate = data?[3]
-    
-    // Check if all three values are not nil
-    if let currentDate = currentDate, let startDate = startDate, let endDate = endDate {
-        
-        // Convert the currentDate, startDate, and endDate strings to Date objects
+    func formatCells (data: [String]){
+       
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        let currentDateObj = dateFormatter.date(from: currentDate)!
-        let startDateObj = dateFormatter.date(from: startDate)!
-        let endDateObj = dateFormatter.date(from: endDate)!
+        dateFormatter.dateFormat = "dd MMM"
+         let cD = data[1]
+         let sD = data[2]
+        let eD = data[3]
+        guard let currentDate = dateFormatter.date(from: cD) else {
+            return
+            
+        }
+        guard let startDate = dateFormatter.date(from: sD) else {
+            return
+        }
         
-        // Check if the currentDate is equal to the startDate or endDate
-        if currentDateObj == startDateObj || currentDateObj == endDateObj {
-            self.backgroundColor = UIColor.systemIndigo
-        } else if currentDateObj > startDateObj && currentDateObj < endDateObj {
-            self.backgroundColor = UIColor.blue
-        } else {
-            self.backgroundColor = UIColor.white
+        if(currentDate == startDate){
+            formatCellPrimary()
+        }
+        guard let endDate = dateFormatter.date(from: eD) else{
+            return
+        }
+        if(currentDate == endDate){
+            formatCellPrimary()
+            
+        }
+        if(currentDate > startDate && currentDate < endDate){
+            formatCellSecondary()
         }
     }
+    func formatCellPrimary(){
+        self.backgroundColor = .systemIndigo
+        titleLabel.textColor = .white
+        self.layer.cornerRadius = 20
+    }
+    func formatCellSecondary(){
+        self.backgroundColor = .lightGray
+        titleLabel.textColor = .white
+        self.layer.cornerRadius = 20
+    }
+   func setupView() {
+       
+    contentView.addSubview(titleLabel)
+    titleLabel.textAlignment = .center
+       titleLabel.snp.makeConstraints {
+           $0.edges.equalToSuperview()
+       }
+     
+       
+       
+           
+       
+       
 }
 }

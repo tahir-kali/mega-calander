@@ -61,8 +61,8 @@ final class ViewController: UIViewController {
         topView.addSubview(endDateLabel)
         titleLabel.textAlignment = .center
         titleLabel.text = "Даты поездки"
-        startDateLabel.text = "Start"
-        endDateLabel.text = "End"
+        startDateLabel.text = selectedStartDate.toString()
+        endDateLabel.text = selectedEndDate.toString()
         formatTopLabels()
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         topView.backgroundColor = .gray.withAlphaComponent(0.3)
@@ -175,21 +175,26 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == weekDaysCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-            cell.data = [weekdays[indexPath.row]]
+            cell.data = [weekdays[indexPath.row],"","",""]
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        
-        if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
-            
-            cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),selectedStartDate.toString(),selectedEndDate.toString()]
-            if currentDate!.endOfMonth() == allDates[datesCounter] {
-                currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
+        let allDatesLength = allDates.count
+        if(allDatesLength > datesCounter){
+            if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
+                
+                cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),selectedStartDate.toString(),selectedEndDate.toString()]
+                if currentDate!.endOfMonth() == allDates[datesCounter] {
+                    currentDate = Calendar.current.date(byAdding: .day, value: 1, to: allDates[datesCounter])
+                }
+                datesCounter += 1
+              
+            } else {
+                cell.data = ["","","",""]
             }
-            datesCounter += 1
-          
-        } else {
-            cell.data = [""]
+            
+        }else{
+            cell.data = ["","","",""]
         }
         
         return cell
@@ -213,26 +218,39 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        var extractCurrentDate = cell.data?[1]
-        let currentDate = extractCurrentDate.map {$0} ?? ""
-        print(currentDate)
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+        guard let cellDate = cell.data?[0] else {return}
+        // Get the current date from the cell
+        let currentDate = cell.data?[1] ?? ""
         
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        let currentDateObj = dateFormatter.date(from: currentDate) ?? Date()
+        dateFormatter.dateFormat = "dd MMM"
+        guard let currentDateObj = dateFormatter.date(from: currentDate) else {
+            print("exited code")
+            return
+        }
         
         // Check if the currentDate is less than startDate
         if currentDateObj < selectedStartDate {
             selectedStartDate = currentDateObj
+            print("set1")
         } else if currentDateObj > selectedStartDate && currentDateObj < selectedEndDate {
             selectedEndDate = currentDateObj
+            print("set2")
         } else if currentDateObj > selectedStartDate && currentDateObj > selectedEndDate {
             selectedEndDate = currentDateObj
+            print("set3")
         }
-        print("Start Date"+selectedStartDate.toString())
+        startDateLabel.text = selectedStartDate.toString()
+        endDateLabel.text = selectedEndDate.toString()
+        cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
+        
     }
+    func returnIntDate(date:Date)-> Int{
+        return Int(date.description)!
+    }
+
 
 }
 
