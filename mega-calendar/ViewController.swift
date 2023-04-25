@@ -13,8 +13,8 @@ final class ViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private lazy var topView = UIView()
     private lazy var titleLabel = UILabel()
-    private lazy var fromDatePickerView = DatePickerView()
-    private lazy var toDatePickerView = DatePickerView()
+    private lazy var startDateLabel = UILabel()
+    private lazy var endDateLabel = UILabel()
     private lazy var sizeForItem = CGSize()
     private lazy var contentView = UIView()
     private lazy var weekDaysCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -54,20 +54,34 @@ final class ViewController: UIViewController {
         self.view.addSubview(collectionView)
         topView.addSubview(weekDaysCollectionView)
         topView.addSubview(titleLabel)
-        topView.addSubview(fromDatePickerView)
-        topView.addSubview(toDatePickerView)
+        topView.addSubview(startDateLabel)
+        topView.addSubview(endDateLabel)
         titleLabel.textAlignment = .center
         titleLabel.text = "Даты поездки"
-        fromDatePickerView.title = "Start"
-        fromDatePickerView.layer.cornerRadius = 10
-        toDatePickerView.layer.cornerRadius = 10
-        toDatePickerView.title = "End"
+        startDateLabel.text = "Start"
+        endDateLabel.text = "End"
+        formatTopLabels(startDateLabel)
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         topView.backgroundColor = .gray.withAlphaComponent(0.3)
         let width = (UIScreen.main.bounds.width - 110) / 7
         sizeForItem = CGSize(width: width, height: width)
     }
-    
+    func formatTopLabels(theLabel){
+        theLabel.layer.cornerRadius = 5
+        theLabel.layer.shadowColor = UIColor.black.cgColor
+        theLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        theLabel.layer.shadowOpacity = 0.5
+        theLabel.layer.shadowRadius = 3
+        theLabel.layer.masksToBounds = false
+        theLabel.backgroundColor = UIColor.white
+        theLabel.textColor = UIColor.black
+        theLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
+        // Insert calendar icon
+        let imageView = UIImageView(image: UIImage(systemName: "calendar"))
+        imageView.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
+        theLabel.addSubview(imageView)
+    }
     func setConstraints() {
         topView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -76,20 +90,20 @@ final class ViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.height.equalTo(sizeForItem.height)
-            $0.top.equalTo(toDatePickerView.snp.bottom).offset(12)
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(12)
             $0.width
         }
         titleLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(12)
         }
-        fromDatePickerView.snp.makeConstraints {
+        startDateLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
-        toDatePickerView.snp.makeConstraints {
-            $0.leading.equalTo(fromDatePickerView.snp.trailing).offset(16)
+        endDateLabel.snp.makeConstraints {
+            $0.leading.equalTo(startDateLabel.snp.trailing).offset(16)
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.width.equalTo(fromDatePickerView.snp.width)
+            $0.width.equalTo(startDateLabel.snp.width)
             $0.trailing.equalToSuperview().inset(16)
         }
         collectionView.snp.makeConstraints {
@@ -100,24 +114,24 @@ final class ViewController: UIViewController {
     }
     
     func setupActions() {
-        fromDatePickerView.didSelect = { [weak self] in
-            guard let self = self else { return }
-            _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
-                guard let date = date else { return }
-                self?.fromDatePickerView.title = "\(date.toString())"
-                self?.startDate = date
-                self?.countDays()
-            }
-        }
-        toDatePickerView.didSelect = { [weak self] in
-            guard let self = self else { return }
-            _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
-                guard let date = date else { return }
-                self?.toDatePickerView.title = "\(date.toString())"
-                self?.endDate = date
-                self?.countDays()
-            }
-        }
+        // startDateLabel.didSelect = { [weak self] in
+        //     guard let self = self else { return }
+        //     _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
+        //         guard let date = date else { return }
+        //         self?.fromDatePickerView.title = "\(date.toString())"
+        //         self?.startDate = date
+        //         self?.countDays()
+        //     }
+        // }
+        // endDateLabel.didSelect = { [weak self] in
+        //     guard let self = self else { return }
+        //     _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
+        //         guard let date = date else { return }
+        //         self?.endDateLabel.title = "\(date.toString())"
+        //         self?.endDate = date
+        //         self?.countDays()
+        //     }
+        // }
     }
     
     private func countDays() {
