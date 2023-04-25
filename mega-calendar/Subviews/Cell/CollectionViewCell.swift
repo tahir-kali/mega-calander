@@ -35,35 +35,35 @@ final class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
-        contentView.addSubview(titleLabel)
-        titleLabel.textAlignment = .center
-        titleLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        let currentDate = data?[1]
-        let startDate = data?[2] ?? nil
-        let endDate = data?[3] ?? nil
-        
-        // all the above three values are of type string date
-        // if currentDate == startDate or endDate then make the current CollectionViewCell background color indigo 
-        // if currentDate is between startDate and endDate then make the CollectionViewCell background color blue
-         // Convert the currentDate, startDate, and endDate strings to Date objects
-        if(currentDate != nil && startDate != nil || endDate != nil){
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            let currentDateObj = dateFormatter.date(from: currentDate)
-            let startDateObj = dateFormatter.date(from: startDate)
-            let endDateObj = dateFormatter.date(from: endDate!)!
-            
-            // Check if the currentDate is equal to the startDate or endDate
-            if currentDateObj == startDateObj || currentDateObj == endDateObj {
-                self.backgroundColor = UIColor.systemIndigo
-            } else if currentDateObj > startDateObj && currentDateObj < endDateObj {
-                self.backgroundColor = UIColor.blue
-            } else {
-                self.backgroundColor = UIColor.white
-            }        }
+   func setupView() {
+    contentView.addSubview(titleLabel)
+    titleLabel.textAlignment = .center
+    titleLabel.snp.makeConstraints {
+        $0.edges.equalToSuperview()
     }
+    
+    let currentDate = data?[1]
+    let startDate = data?[2]
+    let endDate = data?[3]
+    
+    // Check if all three values are not nil
+    if let currentDate = currentDate, let startDate = startDate, let endDate = endDate {
+        
+        // Convert the currentDate, startDate, and endDate strings to Date objects
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let currentDateObj = dateFormatter.date(from: currentDate)!
+        let startDateObj = dateFormatter.date(from: startDate)!
+        let endDateObj = dateFormatter.date(from: endDate)!
+        
+        // Check if the currentDate is equal to the startDate or endDate
+        if currentDateObj == startDateObj || currentDateObj == endDateObj {
+            self.backgroundColor = UIColor.systemIndigo
+        } else if currentDateObj > startDateObj && currentDateObj < endDateObj {
+            self.backgroundColor = UIColor.blue
+        } else {
+            self.backgroundColor = UIColor.white
+        }
+    }
+}
 }
