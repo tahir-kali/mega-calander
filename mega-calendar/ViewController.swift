@@ -214,30 +214,23 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        let currentDate = cell.data![1]
-        // both startDate and endDate is of typeDate but currentDate is of type string
-        // currentDate is less than startDate && less than endDate -> startDate = currentDate + return
-        // currentDate is bigger than startDate but less than endDate -> endDate = currentDate + return
-        // currentDate is bigger than startDate and endDate -> endDate = currentDate + return
+        let currentDate = cell.data?[1]
         
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        let currentDateObj = dateFormatter.date(from: currentDate)!
-        
-        // Check if the currentDate is less than startDate && less than endDate
-        if currentDateObj < startDate! && currentDateObj < endDate! {
-            startDate = currentDateObj
-        } else if currentDateObj > startDate! && currentDateObj < endDate! {
-            endDate = currentDateObj
-        } else if currentDateObj > startDate! && currentDateObj > endDate! {
-            endDate = currentDateObj
+        guard let currentDateObj = dateFormatter.date(from: currentDate!) else {
+            return
         }
-    }
-    func stringToDate(stringDate: String, format: String)-> Date?{
-        let dF = DateFormatter()
-        dF.dateFormat = format
-        return dF.date(from: stringDate)
+        
+        // Check if the currentDate is less than startDate
+        if currentDateObj < startDate {
+            startDate = currentDateObj
+        } else if currentDateObj > startDate && currentDateObj < endDate {
+            endDate = currentDateObj
+        } else if currentDateObj > startDate && currentDateObj > endDate {
+            // Do nothing
+        }
     }
 
 }
