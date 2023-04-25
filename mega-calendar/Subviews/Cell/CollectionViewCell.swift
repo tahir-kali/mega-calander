@@ -41,14 +41,28 @@ final class CollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        if let data = data , data.count >= 3{
-            let currentDate = data[1]
-            let startDate = data[2]
-            let endDate = data[3]
-            if(currentDate == startDate){
-                self.backgroundColor = UIColor.systemIndigo
-            }
-            
+        
+        let currentDate = data[1]
+        let startDate = data[2]
+        let endDate = data[3]
+        
+        // all the above three values are of type string date
+        // if currentDate == startDate or endDate then make the current CollectionViewCell background color indigo 
+        // if currentDate is between startDate and endDate then make the CollectionViewCell background color blue
+         // Convert the currentDate, startDate, and endDate strings to Date objects
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let currentDateObj = dateFormatter.date(from: currentDate)!
+        let startDateObj = dateFormatter.date(from: startDate)!
+        let endDateObj = dateFormatter.date(from: endDate)!
+        
+        // Check if the currentDate is equal to the startDate or endDate
+        if currentDateObj == startDateObj || currentDateObj == endDateObj {
+            self.backgroundColor = UIColor.indigo
+        } else if currentDateObj > startDateObj && currentDateObj < endDateObj {
+            self.backgroundColor = UIColor.blue
+        } else {
+            self.backgroundColor = UIColor.white
         }
     }
 }
