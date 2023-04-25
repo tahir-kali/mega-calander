@@ -42,7 +42,7 @@ final class ViewController: UIViewController {
         weekDaysCollectionView.dataSource = self
         weekDaysCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         weekDaysCollectionView.backgroundColor = .clear
-        weekdayDaysCollectionView.delegate = self
+        weekDaysCollectionView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
@@ -75,9 +75,7 @@ final class ViewController: UIViewController {
         startDateLabel.layer.masksToBounds = false
         startDateLabel.backgroundColor = UIColor.white
         startDateLabel.textColor = UIColor.black
-        startDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        startDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
-        startDateLabel.cornerRadius = 10
+        
         endDateLabel.layer.cornerRadius = 5
         endDateLabel.layer.shadowColor = UIColor.black.cgColor
         endDateLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -86,10 +84,8 @@ final class ViewController: UIViewController {
         endDateLabel.layer.masksToBounds = false
         endDateLabel.backgroundColor = UIColor.white
         endDateLabel.textColor = UIColor.black
-        endDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        endDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
-        endDateLabel.cornerRadius = 10
-    }
+       
+          }
     func setConstraints() {
         topView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -188,7 +184,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
             }
             datesCounter += 1
-            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
+           
             
         } else {
             cell.title = ""
@@ -213,17 +209,15 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             return CGSize(width: collectionView.frame.width, height: 60)
         }
     }
-    @objc
-    func tap(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: self.collectionView)
-        let indexPath = self.collectionView.indexPathForItem(at: location)
-       
-            
-        let cell = self.collectionView.cellForItem(at: indexPath!)
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = self.collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = UIColor.systemIndigo
         cell?.layer.cornerRadius = 20
-        
     }
+        
+        
+    
 
 }
 
