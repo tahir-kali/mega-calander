@@ -76,11 +76,8 @@ final class ViewController: UIViewController {
         startDateLabel.backgroundColor = UIColor.white
         startDateLabel.textColor = UIColor.black
         startDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-        // Insert calendar icon
-        let imageView = UIImageView(image: UIImage(systemName: "calendar"))
-        imageView.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
-        startDateLabel.addSubview(imageView)
+        startDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
+        
         endDateLabel.layer.cornerRadius = 5
         endDateLabel.layer.shadowColor = UIColor.black.cgColor
         endDateLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -90,11 +87,8 @@ final class ViewController: UIViewController {
         endDateLabel.backgroundColor = UIColor.white
         endDateLabel.textColor = UIColor.black
         endDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-        // Insert calendar icon
-        let imageView = UIImageView(image: UIImage(systemName: "calendar"))
-        imageView.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
-        endDateLabel.addSubview(imageView)
+        endDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
+      
     }
     func setConstraints() {
         topView.snp.makeConstraints {
