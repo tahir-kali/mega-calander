@@ -37,8 +37,14 @@ final class ViewController: UIViewController {
         setConstraints()
         setupActions()
         startDate = Date()
-        endDate = Calendar.current.date(byAdding: .month, value: 3, to: startDate!)
+        endDate = returnFutureMonths(startDate!)
         countDays()
+    }
+    func returnFutureMonths(currentDate: Date) -> Date {
+        let calendar = Calendar.current
+        let components = DateComponents(month: 3)
+        let futureDate = calendar.date(byAdding: components, to: currentDate) ?? Date()
+        return futureDate
     }
     func setCollectionView() {
         weekDaysCollectionView.dataSource = self
@@ -223,7 +229,6 @@ extension Calendar {
         let fromDate = startOfDay(for: from) // <1>
         let toDate = startOfDay(for: to) // <2>
         let numberOfDays = dateComponents([.day], from: fromDate, to: toDate) // <3>
-        
         return numberOfDays.day!
     }
 }
