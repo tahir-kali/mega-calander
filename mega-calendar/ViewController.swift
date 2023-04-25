@@ -226,11 +226,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let currentDateObj = dateFormatter.date(from: currentDate)!
         
         // Check if the currentDate is less than startDate && less than endDate
-        if currentDateObj < startDate && currentDateObj < endDate {
+        if currentDateObj < startDate! && currentDateObj < endDate! {
             startDate = currentDateObj
-        } else if currentDateObj > startDate && currentDateObj < endDate {
+        } else if currentDateObj > startDate! && currentDateObj < endDate! {
             endDate = currentDateObj
-        } else if currentDateObj > startDate && currentDateObj > endDate {
+        } else if currentDateObj > startDate! && currentDateObj > endDate! {
             endDate = currentDateObj
         }
     }
