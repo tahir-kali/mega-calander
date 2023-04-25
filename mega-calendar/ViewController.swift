@@ -214,14 +214,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        let currentDate = cell.data?[1]
+        var extractCurrentDate = cell.data?[1]
+        let currentDate = extractCurrentDate.map {$0} ?? ""
+        print(currentDate)
         
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        guard let currentDateObj = dateFormatter.date(from: currentDate!) else {
-            return
-        }
+        let currentDateObj = dateFormatter.date(from: currentDate) ?? Date()
         
         // Check if the currentDate is less than startDate
         if currentDateObj < selectedStartDate {
@@ -231,6 +231,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         } else if currentDateObj > selectedStartDate && currentDateObj > selectedEndDate {
             selectedEndDate = currentDateObj
         }
+        print("Start Date"+selectedStartDate.toString())
     }
 
 }
