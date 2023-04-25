@@ -19,8 +19,6 @@
 		BC0AF6B129F4540800B0EBE3 /* mega_calendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF6B029F4540800B0EBE3 /* mega_calendarTests.swift */; };
 		BC0AF6BB29F4540800B0EBE3 /* mega_calendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF6BA29F4540800B0EBE3 /* mega_calendarUITests.swift */; };
 		BC0AF6BD29F4540800B0EBE3 /* mega_calendarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF6BC29F4540800B0EBE3 /* mega_calendarUITestsLaunchTests.swift */; };
-		BC20AEC229F45AA00053C141 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC129F45AA00053C141 /* DatePickerView.swift */; };
-		BC20AEC429F45AAE0053C141 /* PopUpDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */; };
 		BC20AEC629F45AC20053C141 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */; };
 		C36278DE3D4E117687917422 /* Pods_mega_calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D989A9EAD4AF2D4D6498616 /* Pods_mega_calendar.framework */; };
 /* End PBXBuildFile section */
@@ -64,8 +62,6 @@
 		BC0AF6B629F4540800B0EBE3 /* mega-calendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mega-calendarUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC0AF6BA29F4540800B0EBE3 /* mega_calendarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mega_calendarUITests.swift; sourceTree = "<group>"; };
 		BC0AF6BC29F4540800B0EBE3 /* mega_calendarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mega_calendarUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BC20AEC129F45AA00053C141 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerView.swift; path = Subviews/DatePickerView.swift; sourceTree = "<group>"; };
-		BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUpDatePickerView.swift; path = Subviews/PopUpDatePickerView.swift; sourceTree = "<group>"; };
 		BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = Subviews/Cell/CollectionViewCell.swift; sourceTree = "<group>"; };
 		F22CBC000ADB029A4EF06C1D /* Pods_mega_calendar_mega_calendarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendar_mega_calendarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F20462470B3B407CFD7F7D /* Pods-mega-calendar-mega-calendarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar-mega-calendarUITests.release.xcconfig"; path = "Target Support Files/Pods-mega-calendar-mega-calendarUITests/Pods-mega-calendar-mega-calendarUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,8 +135,6 @@
 			children = (
 				43690D4429F7DEC2007534DD /* SectionHeader.txt.swift */,
 				BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */,
-				BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */,
-				BC20AEC129F45AA00053C141 /* DatePickerView.swift */,
 				BC0AF69929F4540700B0EBE3 /* AppDelegate.swift */,
 				BC0AF69B29F4540700B0EBE3 /* SceneDelegate.swift */,
 				BC0AF69D29F4540700B0EBE3 /* ViewController.swift */,
@@ -418,8 +412,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC20AEC429F45AAE0053C141 /* PopUpDatePickerView.swift in Sources */,
-				BC20AEC229F45AA00053C141 /* DatePickerView.swift in Sources */,
 				BC20AEC629F45AC20053C141 /* CollectionViewCell.swift in Sources */,
 				BC0AF69E29F4540700B0EBE3 /* ViewController.swift in Sources */,
 				BC0AF69A29F4540700B0EBE3 /* AppDelegate.swift in Sources */,

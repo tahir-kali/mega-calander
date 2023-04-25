@@ -20,8 +20,8 @@ final class ViewController: UIViewController {
     private lazy var weekDaysCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var startDate: Date?
     private var endDate: Date?
-    private var selectedStartDate: Date?
-    private var selectedEndDate: Date?
+    private var selectedStartDate: Date = Date()
+    private var selectedEndDate: Date = Date()
     private var numberOfMonts: Int?
     private var numberOfDays: Int?
     private var currentDate: Date?
@@ -97,7 +97,6 @@ final class ViewController: UIViewController {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(sizeForItem.height)
             $0.top.equalTo(endDateLabel.snp.bottom).offset(12)
-            $0.width
         }
         titleLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(12)
@@ -175,21 +174,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == weekDaysCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-            cell.data[0] = weekdays[indexPath.row]
+            cell.data = [weekdays[indexPath.row]]
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
-            cell.data[0] = "\(allDates[datesCounter].get(.day))"
-            cell.data[1] = allDates[datesCounter]
+            
+            cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),selectedStartDate.toString(),selectedEndDate.toString()]
             if currentDate!.endOfMonth() == allDates[datesCounter] {
                 currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
             }
             datesCounter += 1
           
         } else {
-            cell.data[0] = ""
+            cell.data = [""]
         }
         
         return cell
@@ -213,19 +212,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = self.collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = UIColor.systemIndigo
-        cell?.layer.cornerRadius = 20
-
-        if(!selectedStartDate){
-            selectedStartDate = cell?.data[1]
-            startDateLabel.text = cell?.data[1]
-            return
-        }
-        if(!selectedEndDate){
-            selectedEndDate = cell?.data[2]
-            endDateLabel.text= cell?.data[2]
-        }
+        let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
         
     }
 
