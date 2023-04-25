@@ -55,17 +55,17 @@ final class CollectionViewCell: UICollectionViewCell {
             return
         }
         
-        if(returnIntDate(currentDate) == returnIntDate(startDate)){
+        if(returnIntDate(date:currentDate) == returnIntDate(date:startDate)){
             formatCellPrimary()
         }
         guard let endDate = dateFormatter.date(from: eD) else{
             return
         }
-        if(returnIntDate(currentDate) == endDate){
+        if(returnIntDate(date:currentDate) == returnIntDate(date:endDate)){
             formatCellPrimary()
             
         }
-        if(returnIntDate(currentDate) > returnIntDate(startDate) && returnIntDate(currentDate) < returnIntDate(endDate)){
+        if(returnIntDate(date:currentDate) > returnIntDate(date:startDate) && returnIntDate(date:currentDate) < returnIntDate(date:endDate)){
             formatCellSecondary()
         }
     }
