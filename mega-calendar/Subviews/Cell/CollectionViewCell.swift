@@ -1,4 +1,3 @@
-//
 //  CollectionViewCell.swift
 //  MegaCalendar
 //
@@ -23,6 +22,22 @@ final class CollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    var currentDate: Date? {
+        didSet {
+            guard let currentDate = currentDate else { return } 
+        }
+    }
+    var startDate: Date? {
+        didSet {
+            guard let startDate = startDate else { return } 
+        }
+    }
+    
+    var endDate: Date? {
+        didSet {
+            guard let endDate = endDate else { return }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +55,7 @@ final class CollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
     }
    
 }

@@ -20,6 +20,8 @@ final class ViewController: UIViewController {
     private lazy var weekDaysCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var startDate: Date?
     private var endDate: Date?
+    private var selectedStartDate: Date?
+    private var selectedEndDate: Date?
     private var numberOfMonts: Int?
     private var numberOfDays: Int?
     private var currentDate: Date?
@@ -184,8 +186,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
             }
             datesCounter += 1
-           
-            
+           cell.currentDate = allDates[datesCounter];
+           cell.startDate = selectedStartDate;
+           cell.endDate = selectedEndDate;
         } else {
             cell.title = ""
         }
@@ -214,10 +217,18 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let cell = self.collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = UIColor.systemIndigo
         cell?.layer.cornerRadius = 20
+
+        if(!selectedStartDate){
+            selectedStartDate = cell?.currentDate
+            startDateLabel.text = cell?.currentDate
+            return
+        }
+        if(!selectedEndDate){
+            selectedEndDate = cell?.currentDate
+            endDateLabel.text= cell?.currentDate
+        }
+        
     }
-        
-        
-    
 
 }
 
