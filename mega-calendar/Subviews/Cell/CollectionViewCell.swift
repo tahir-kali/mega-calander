@@ -55,17 +55,17 @@ final class CollectionViewCell: UICollectionViewCell {
             return
         }
         
-        if(currentDate == startDate){
+        if(returnIntDate(currentDate) == returnIntDate(startDate)){
             formatCellPrimary()
         }
         guard let endDate = dateFormatter.date(from: eD) else{
             return
         }
-        if(currentDate == endDate){
+        if(returnIntDate(currentDate) == endDate){
             formatCellPrimary()
             
         }
-        if(currentDate > startDate && currentDate < endDate){
+        if(returnIntDate(currentDate) > returnIntDate(startDate) && returnIntDate(currentDate) < returnIntDate(endDate)){
             formatCellSecondary()
         }
     }
@@ -78,6 +78,9 @@ final class CollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .lightGray
         titleLabel.textColor = .white
         self.layer.cornerRadius = 20
+    }
+    func returnIntDate(date:Date)-> Int{
+        return Int(date.description)!
     }
    func setupView() {
        

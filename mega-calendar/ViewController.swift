@@ -232,13 +232,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         
         // Check if the currentDate is less than startDate
-        if currentDateObj < selectedStartDate {
+        if returnIntDate(currentDateObj) < returnIntDate(selectedStartDate) {
             selectedStartDate = currentDateObj
             print("set1")
-        } else if currentDateObj > selectedStartDate && currentDateObj < selectedEndDate {
+        } else if returnIntDate(currentDateObj) > returnIntDate(selectedStartDate) && returnIntDate(currentDateObj) < returnIntDate(selectedEndDate) {
             selectedEndDate = currentDateObj
             print("set2")
-        } else if currentDateObj > selectedStartDate && currentDateObj > selectedEndDate {
+        } else if returnIntDate(currentDateObj) > returnIntDate(selectedStartDate) && returnIntDate(currentDateObj) > returnIntDate(selectedEndDate) {
             selectedEndDate = currentDateObj
             print("set3")
         }
