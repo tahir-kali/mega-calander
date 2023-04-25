@@ -37,15 +37,10 @@ final class ViewController: UIViewController {
         setConstraints()
         setupActions()
         startDate = Date()
-        endDate = returnFutureMonths(startDate!)
+        endDate = Calendar.current.date(byAdding: .month, value: 2, to: startDate!)
         countDays()
     }
-    func returnFutureMonths(currentDate: Date) -> Date {
-        let calendar = Calendar.current
-        let components = DateComponents(month: 3)
-        let futureDate = calendar.date(byAdding: components, to: currentDate) ?? Date()
-        return futureDate
-    }
+ 
     func setCollectionView() {
         weekDaysCollectionView.dataSource = self
         weekDaysCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
@@ -219,7 +214,15 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        
+        print(cell.data![1])
+        return
+    
+    
+    }
+    func stringToDate(stringDate: String, format: String)-> Date?{
+        let dF = DateFormatter()
+        dF.dateFormat = format
+        return dF.date(from: stringDate)
     }
 
 }
