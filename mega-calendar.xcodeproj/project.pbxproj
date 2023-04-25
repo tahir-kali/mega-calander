@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		11E612298BEA918E75294C60 /* Pods_mega_calendar_mega_calendarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22CBC000ADB029A4EF06C1D /* Pods_mega_calendar_mega_calendarUITests.framework */; };
-		436A068329F7A0F90058F4C4 /* SectionHeader.txt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A068229F7A0F90058F4C4 /* SectionHeader.txt.swift */; };
 		56D4E54EA45E65204839CA20 /* Pods_mega_calendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7B254E184F66B278F74378 /* Pods_mega_calendarTests.framework */; };
 		BC0AF69A29F4540700B0EBE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF69929F4540700B0EBE3 /* AppDelegate.swift */; };
 		BC0AF69C29F4540700B0EBE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF69B29F4540700B0EBE3 /* SceneDelegate.swift */; };
@@ -22,6 +21,7 @@
 		BC20AEC229F45AA00053C141 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC129F45AA00053C141 /* DatePickerView.swift */; };
 		BC20AEC429F45AAE0053C141 /* PopUpDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */; };
 		BC20AEC629F45AC20053C141 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */; };
+		BC20AECA29F462870053C141 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20AEC929F462870053C141 /* SectionHeader.swift */; };
 		C36278DE3D4E117687917422 /* Pods_mega_calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D989A9EAD4AF2D4D6498616 /* Pods_mega_calendar.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,6 @@
 		0B7B254E184F66B278F74378 /* Pods_mega_calendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D989A9EAD4AF2D4D6498616 /* Pods_mega_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30870C0E01F985A1616881B2 /* Pods-mega-calendar-mega-calendarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar-mega-calendarUITests.debug.xcconfig"; path = "Target Support Files/Pods-mega-calendar-mega-calendarUITests/Pods-mega-calendar-mega-calendarUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		436A068229F7A0F90058F4C4 /* SectionHeader.txt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.txt.swift; sourceTree = "<group>"; };
 		4B83EF393C1E4879C21A4171 /* Pods-mega-calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar.debug.xcconfig"; path = "Target Support Files/Pods-mega-calendar/Pods-mega-calendar.debug.xcconfig"; sourceTree = "<group>"; };
 		4BEC3836DCC865F3062EC4FC /* Pods-mega-calendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendarTests.release.xcconfig"; path = "Target Support Files/Pods-mega-calendarTests/Pods-mega-calendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		B66FA314B41E860940B540A2 /* Pods-mega-calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar.release.xcconfig"; path = "Target Support Files/Pods-mega-calendar/Pods-mega-calendar.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		BC20AEC129F45AA00053C141 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerView.swift; path = Subviews/DatePickerView.swift; sourceTree = "<group>"; };
 		BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUpDatePickerView.swift; path = Subviews/PopUpDatePickerView.swift; sourceTree = "<group>"; };
 		BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = Subviews/Cell/CollectionViewCell.swift; sourceTree = "<group>"; };
+		BC20AEC929F462870053C141 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeader.swift; path = "../../Downloads/mega-calander-main/Subviews/Cell/SectionHeader.swift"; sourceTree = "<group>"; };
 		F22CBC000ADB029A4EF06C1D /* Pods_mega_calendar_mega_calendarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendar_mega_calendarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F20462470B3B407CFD7F7D /* Pods-mega-calendar-mega-calendarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar-mega-calendarUITests.release.xcconfig"; path = "Target Support Files/Pods-mega-calendar-mega-calendarUITests/Pods-mega-calendar-mega-calendarUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +115,7 @@
 		BC0AF68D29F4540700B0EBE3 = {
 			isa = PBXGroup;
 			children = (
+				BC20AEC929F462870053C141 /* SectionHeader.swift */,
 				BC0AF69829F4540700B0EBE3 /* mega-calendar */,
 				BC0AF6AF29F4540800B0EBE3 /* mega-calendarTests */,
 				BC0AF6B929F4540800B0EBE3 /* mega-calendarUITests */,
@@ -137,7 +138,6 @@
 		BC0AF69829F4540700B0EBE3 /* mega-calendar */ = {
 			isa = PBXGroup;
 			children = (
-				436A068229F7A0F90058F4C4 /* SectionHeader.txt.swift */,
 				BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */,
 				BC20AEC329F45AAE0053C141 /* PopUpDatePickerView.swift */,
 				BC20AEC129F45AA00053C141 /* DatePickerView.swift */,
@@ -421,9 +421,9 @@
 				BC20AEC429F45AAE0053C141 /* PopUpDatePickerView.swift in Sources */,
 				BC20AEC229F45AA00053C141 /* DatePickerView.swift in Sources */,
 				BC20AEC629F45AC20053C141 /* CollectionViewCell.swift in Sources */,
+				BC20AECA29F462870053C141 /* SectionHeader.swift in Sources */,
 				BC0AF69E29F4540700B0EBE3 /* ViewController.swift in Sources */,
 				BC0AF69A29F4540700B0EBE3 /* AppDelegate.swift in Sources */,
-				436A068329F7A0F90058F4C4 /* SectionHeader.txt.swift in Sources */,
 				BC0AF69C29F4540700B0EBE3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

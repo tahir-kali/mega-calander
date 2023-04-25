@@ -1,4 +1,3 @@
-
 //
 //  ViewController.swift
 //  MegaCalendar
@@ -14,9 +13,10 @@ final class ViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private lazy var topView = UIView()
     private lazy var titleLabel = UILabel()
+    private lazy var fromDatePickerView = DatePickerView()
+    private lazy var toDatePickerView = DatePickerView()
     private lazy var sizeForItem = CGSize()
-    private lazy var startDateLabel = UILabel()
-    private lazy var endDateLabel = UILabel()
+    private lazy var contentView = UIView()
     private lazy var weekDaysCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var startDate: Date?
     private var endDate: Date?
@@ -42,7 +42,7 @@ final class ViewController: UIViewController {
         weekDaysCollectionView.dataSource = self
         weekDaysCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         weekDaysCollectionView.backgroundColor = .clear
-        weekDaysCollectionView.delegate = self
+        weekdayDaysCollectionView.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
@@ -54,12 +54,14 @@ final class ViewController: UIViewController {
         self.view.addSubview(collectionView)
         topView.addSubview(weekDaysCollectionView)
         topView.addSubview(titleLabel)
+        topView.addSubview(fromDatePickerView)
+        topView.addSubview(toDatePickerView)
         titleLabel.textAlignment = .center
         titleLabel.text = "Даты поездки"
-        startDateLabel.text = "Start"
-        endDateLabel.text = "End"
-        topView.addSubview(startDateLabel)
-        topView.addSubview(endDateLabel)
+        fromDatePickerView.title = "Start"
+        fromDatePickerView.layer.cornerRadius = 10
+        toDatePickerView.layer.cornerRadius = 10
+        toDatePickerView.title = "End"
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         topView.backgroundColor = .gray.withAlphaComponent(0.3)
         let width = (UIScreen.main.bounds.width - 110) / 7
@@ -71,25 +73,25 @@ final class ViewController: UIViewController {
             $0.top.leading.trailing.equalToSuperview()
         }
         weekDaysCollectionView.snp.makeConstraints {
-                  $0.leading.trailing.equalToSuperview()
-                  $0.bottom.equalToSuperview()
-                  $0.height.equalTo(sizeForItem.height)
-                  $0.top.equalTo(startDateLabel.snp.bottom).offset(12)
-              }
-              titleLabel.snp.makeConstraints {
-                  $0.top.leading.trailing.equalToSuperview().inset(12)
-              }
-              startDateLabel.snp.makeConstraints {
-                  $0.leading.equalToSuperview().inset(16)
-                  $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-              }
-              endDateLabel.snp.makeConstraints {
-                  $0.leading.equalTo(startDateLabel.snp.trailing).offset(16)
-                  $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-                  $0.width.equalTo(startDateLabel.snp.width)
-                  $0.trailing.equalToSuperview().inset(16)
-              }
-      
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(sizeForItem.height)
+            $0.top.equalTo(toDatePickerView.snp.bottom).offset(12)
+            $0.width
+        }
+        titleLabel.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview().inset(12)
+        }
+        fromDatePickerView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+        }
+        toDatePickerView.snp.makeConstraints {
+            $0.leading.equalTo(fromDatePickerView.snp.trailing).offset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.width.equalTo(fromDatePickerView.snp.width)
+            $0.trailing.equalToSuperview().inset(16)
+        }
         collectionView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -98,7 +100,24 @@ final class ViewController: UIViewController {
     }
     
     func setupActions() {
-       
+        fromDatePickerView.didSelect = { [weak self] in
+            guard let self = self else { return }
+            _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
+                guard let date = date else { return }
+                self?.fromDatePickerView.title = "\(date.toString())"
+                self?.startDate = date
+                self?.countDays()
+            }
+        }
+        toDatePickerView.didSelect = { [weak self] in
+            guard let self = self else { return }
+            _ = PopUpDatePickerView.createAndShow(minDate: self.startDate, maxDate: self.endDate, viewController: self, title: "select date") { [weak self] date in
+                guard let date = date else { return }
+                self?.toDatePickerView.title = "\(date.toString())"
+                self?.endDate = date
+                self?.countDays()
+            }
+        }
     }
     
     private func countDays() {
