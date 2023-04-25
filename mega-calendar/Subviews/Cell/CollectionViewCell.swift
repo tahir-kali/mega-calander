@@ -41,7 +41,7 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     
     func formatCells (data: [String]){
-       
+        if(data == ["","","",""]) {return }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
          let cD = data[1]
@@ -56,6 +56,7 @@ final class CollectionViewCell: UICollectionViewCell {
         }
         
         if(currentDate == startDate){
+            print("\(currentDate) : \(startDate) start")
             formatCellPrimary()
             return
         }
@@ -63,13 +64,17 @@ final class CollectionViewCell: UICollectionViewCell {
             return
         }
         if(currentDate == endDate){
+            print("\(currentDate) : \(endDate) end")
             formatCellPrimary()
             return
             
         }
         if(currentDate > startDate && currentDate < endDate){
             formatCellSecondary()
+            return
         }
+        resetCellFormats()
+        
     }
     func formatCellPrimary(){
         self.backgroundColor = .systemIndigo
@@ -80,6 +85,10 @@ final class CollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .lightGray
         titleLabel.textColor = .white
         self.layer.cornerRadius = 20
+    }
+    func resetCellFormats(){
+        self.backgroundColor  = .white
+        titleLabel.textColor = .black
     }
     
    func setupView() {

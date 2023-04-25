@@ -244,8 +244,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         startDateLabel.text = selectedStartDate.toString()
         endDateLabel.text = selectedEndDate.toString()
-        cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
-        
+        //cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
+        countDays()
     }
 
 }
