@@ -60,27 +60,41 @@ final class ViewController: UIViewController {
         titleLabel.text = "Даты поездки"
         startDateLabel.text = "Start"
         endDateLabel.text = "End"
-        formatTopLabels(startDateLabel)
+        formatTopLabels()
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         topView.backgroundColor = .gray.withAlphaComponent(0.3)
         let width = (UIScreen.main.bounds.width - 110) / 7
         sizeForItem = CGSize(width: width, height: width)
     }
-    func formatTopLabels(theLabel){
-        theLabel.layer.cornerRadius = 5
-        theLabel.layer.shadowColor = UIColor.black.cgColor
-        theLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
-        theLabel.layer.shadowOpacity = 0.5
-        theLabel.layer.shadowRadius = 3
-        theLabel.layer.masksToBounds = false
-        theLabel.backgroundColor = UIColor.white
-        theLabel.textColor = UIColor.black
-        theLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    func formatTopLabels(){
+        startDateLabel.layer.cornerRadius = 5
+        startDateLabel.layer.shadowColor = UIColor.black.cgColor
+        startDateLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        startDateLabel.layer.shadowOpacity = 0.5
+        startDateLabel.layer.shadowRadius = 3
+        startDateLabel.layer.masksToBounds = false
+        startDateLabel.backgroundColor = UIColor.white
+        startDateLabel.textColor = UIColor.black
+        startDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
         // Insert calendar icon
         let imageView = UIImageView(image: UIImage(systemName: "calendar"))
         imageView.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
-        theLabel.addSubview(imageView)
+        startDateLabel.addSubview(imageView)
+        endDateLabel.layer.cornerRadius = 5
+        endDateLabel.layer.shadowColor = UIColor.black.cgColor
+        endDateLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        endDateLabel.layer.shadowOpacity = 0.5
+        endDateLabel.layer.shadowRadius = 3
+        endDateLabel.layer.masksToBounds = false
+        endDateLabel.backgroundColor = UIColor.white
+        endDateLabel.textColor = UIColor.black
+        endDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
+        // Insert calendar icon
+        let imageView = UIImageView(image: UIImage(systemName: "calendar"))
+        imageView.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
+        endDateLabel.addSubview(imageView)
     }
     func setConstraints() {
         topView.snp.makeConstraints {
