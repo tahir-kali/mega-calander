@@ -230,15 +230,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             print("exited code")
             return
         }
+        guard let sDate = dateFormatter.date(from: selectedStartDate) else {
+            return
+        }
+        guard let eDate = dateFormatter.date(from: selectedEndDate) else {
+            return
+        }
         
         // Check if the currentDate is less than startDate
-        if returnIntDate(date:currentDateObj) < returnIntDate(date:selectedStartDate) {
+        if currentDateObj < sDate {
             selectedStartDate = currentDateObj
             print("set1")
-        } else if returnIntDate(date:currentDateObj) > returnIntDate(date:selectedStartDate) && returnIntDate(date:currentDateObj) < returnIntDate(date: selectedEndDate) {
+        } else if currentDateObj > sDate && currentDateObj < eDate {
             selectedEndDate = currentDateObj
             print("set2")
-        } else if returnIntDate(date:currentDateObj) > returnIntDate(date:selectedStartDate) && returnIntDate(date:currentDateObj) > returnIntDate(date: selectedEndDate) {
+        } else if currentDateObj > sDate && currentDateObj > eDate {
             selectedEndDate = currentDateObj
             print("set3")
         }
@@ -247,10 +253,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
         
     }
-    func returnIntDate(date:Date)-> Int{
-        return Int(date.description)!
-    }
-
 
 }
 
