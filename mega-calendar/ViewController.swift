@@ -175,22 +175,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == weekDaysCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-            cell.title = weekdays[indexPath.row]
+            cell.data[0] = weekdays[indexPath.row]
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
-            cell.title = "\(allDates[datesCounter].get(.day))"
+            cell.data[0] = "\(allDates[datesCounter].get(.day))"
+            cell.data[1] = allDates[datesCounter]
             if currentDate!.endOfMonth() == allDates[datesCounter] {
                 currentDate = Calendar.current.date(byAdding: .day, value: 3, to: allDates[datesCounter])
             }
             datesCounter += 1
-           cell.currentDate = allDates[datesCounter];
-           cell.startDate = selectedStartDate;
-           cell.endDate = selectedEndDate;
+          
         } else {
-            cell.title = ""
+            cell.data[0] = ""
         }
         
         return cell
@@ -219,13 +218,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell?.layer.cornerRadius = 20
 
         if(!selectedStartDate){
-            selectedStartDate = cell?.currentDate
-            startDateLabel.text = cell?.currentDate
+            selectedStartDate = cell?.data[1]
+            startDateLabel.text = cell?.data[1]
             return
         }
         if(!selectedEndDate){
-            selectedEndDate = cell?.currentDate
-            endDateLabel.text= cell?.currentDate
+            selectedEndDate = cell?.data[2]
+            endDateLabel.text= cell?.data[2]
         }
         
     }

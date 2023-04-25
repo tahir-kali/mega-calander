@@ -8,36 +8,22 @@ import UIKit
 import SnapKit
 
 final class CollectionViewCell: UICollectionViewCell {
-    override var reuseIdentifier: String? {
+    override var reuseIdentifier: Array? {
         return "CollectionViewCell"
     }
     
     private let titleLabel = UILabel()
-    var title: String? {
+    var data: Array? {
         didSet {
-            guard let title = title else { return }
-            titleLabel.text = title
+            guard let data = data else { return }
+            // 0 for title 1 for currentDate 2 for startDate 3 for endDate
+            titleLabel.text = data[0]
             if(title=="СБ"||title=="ВС"){
                 titleLabel.textColor = UIColor.red
             }
         }
     }
-    var currentDate: Date? {
-        didSet {
-            guard let currentDate = currentDate else { return } 
-        }
-    }
-    var startDate: Date? {
-        didSet {
-            guard let startDate = startDate else { return } 
-        }
-    }
-    
-    var endDate: Date? {
-        didSet {
-            guard let endDate = endDate else { return }
-        }
-    }
+   
     
     override init(frame: CGRect) {
         super.init(frame: frame)
