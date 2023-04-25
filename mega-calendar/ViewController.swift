@@ -77,7 +77,7 @@ final class ViewController: UIViewController {
         startDateLabel.textColor = UIColor.black
         startDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         startDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
-        
+        startDateLabel.cornerRadius = 10
         endDateLabel.layer.cornerRadius = 5
         endDateLabel.layer.shadowColor = UIColor.black.cgColor
         endDateLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -88,7 +88,7 @@ final class ViewController: UIViewController {
         endDateLabel.textColor = UIColor.black
         endDateLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         endDateLabel.textContainerInset = UIEdgeInsetsMake(10, 0, 10, 0);
-      
+        endDateLabel.cornerRadius = 10
     }
     func setConstraints() {
         topView.snp.makeConstraints {
