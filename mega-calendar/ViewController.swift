@@ -223,28 +223,55 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         // Get the current date from the cell
         let currentDate = cell.data?[1] ?? ""
         
+        
+
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
         guard let currentDateObj = dateFormatter.date(from: currentDate) else {
-            print("exited code")
             return
         }
+        let compareMonths = Calendar.current.compare(currentDateObj, to: selectedStartDate, toGranularity: .month)
+
+        if compareMonths == .orderedSame {
+        return
+        } else if compareMonths == .orderedAscending {
         
-        // Check if the currentDate is less than startDate
-        if currentDateObj < selectedStartDate {
-            selectedStartDate = currentDateObj
-            print("set1")
-        } else if currentDateObj > selectedStartDate && currentDateObj < selectedEndDate {
-            selectedEndDate = currentDateObj
-            print("set2")
-        } else if currentDateObj > selectedStartDate && currentDateObj > selectedEndDate {
-            selectedEndDate = currentDateObj
-            print("set3")
+        selectedStartDate = currentDateObj
+        reloadDataOfCollectionView()
+        return
+
+        } else {
+
+        selectedEndDate = currentDateObj
+        reloadDataOfCollectionView()
+        return
+
         }
+        
+        let compareDays = Calendar.current.compare(currentDateObj, to: selectedStartDate, toGranularity: .day)
+
+        if compareDays == .orderedSame {
+        return
+        } else if compareDays == .orderedAscending {
+        
+        selectedStartDate = currentDateObj
+        reloadDataOfCollectionView()
+        return
+
+        } else {
+
+        selectedEndDate = currentDateObj
+        reloadDataOfCollectionView()
+        return
+
+        }
+       
+        
+    }
+    func reloadDataOfCollectionView(){
         startDateLabel.text = selectedStartDate.toString()
         endDateLabel.text = selectedEndDate.toString()
-        //cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
         countDays()
     }
 
