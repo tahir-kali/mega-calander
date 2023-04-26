@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11E612298BEA918E75294C60 /* Pods_mega_calendar_mega_calendarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22CBC000ADB029A4EF06C1D /* Pods_mega_calendar_mega_calendarUITests.framework */; };
-		43690D4529F7DEC2007534DD /* SectionHeader.txt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43690D4429F7DEC2007534DD /* SectionHeader.txt.swift */; };
+		4309D12E29F9714400F737D5 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309D12D29F9714400F737D5 /* SectionHeader.swift */; };
 		56D4E54EA45E65204839CA20 /* Pods_mega_calendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7B254E184F66B278F74378 /* Pods_mega_calendarTests.framework */; };
 		BC0AF69A29F4540700B0EBE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF69929F4540700B0EBE3 /* AppDelegate.swift */; };
 		BC0AF69C29F4540700B0EBE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AF69B29F4540700B0EBE3 /* SceneDelegate.swift */; };
@@ -44,7 +44,7 @@
 		0B7B254E184F66B278F74378 /* Pods_mega_calendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D989A9EAD4AF2D4D6498616 /* Pods_mega_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mega_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30870C0E01F985A1616881B2 /* Pods-mega-calendar-mega-calendarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar-mega-calendarUITests.debug.xcconfig"; path = "Target Support Files/Pods-mega-calendar-mega-calendarUITests/Pods-mega-calendar-mega-calendarUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		43690D4429F7DEC2007534DD /* SectionHeader.txt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.txt.swift; sourceTree = "<group>"; };
+		4309D12D29F9714400F737D5 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeader.swift; path = Subviews/Cell/SectionHeader.swift; sourceTree = "<group>"; };
 		4B83EF393C1E4879C21A4171 /* Pods-mega-calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar.debug.xcconfig"; path = "Target Support Files/Pods-mega-calendar/Pods-mega-calendar.debug.xcconfig"; sourceTree = "<group>"; };
 		4BEC3836DCC865F3062EC4FC /* Pods-mega-calendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendarTests.release.xcconfig"; path = "Target Support Files/Pods-mega-calendarTests/Pods-mega-calendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		B66FA314B41E860940B540A2 /* Pods-mega-calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mega-calendar.release.xcconfig"; path = "Target Support Files/Pods-mega-calendar/Pods-mega-calendar.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		BC0AF69829F4540700B0EBE3 /* mega-calendar */ = {
 			isa = PBXGroup;
 			children = (
-				43690D4429F7DEC2007534DD /* SectionHeader.txt.swift */,
+				4309D12D29F9714400F737D5 /* SectionHeader.swift */,
 				BC20AEC529F45AC20053C141 /* CollectionViewCell.swift */,
 				BC0AF69929F4540700B0EBE3 /* AppDelegate.swift */,
 				BC0AF69B29F4540700B0EBE3 /* SceneDelegate.swift */,
@@ -414,8 +414,8 @@
 			files = (
 				BC20AEC629F45AC20053C141 /* CollectionViewCell.swift in Sources */,
 				BC0AF69E29F4540700B0EBE3 /* ViewController.swift in Sources */,
+				4309D12E29F9714400F737D5 /* SectionHeader.swift in Sources */,
 				BC0AF69A29F4540700B0EBE3 /* AppDelegate.swift in Sources */,
-				43690D4529F7DEC2007534DD /* SectionHeader.txt.swift in Sources */,
 				BC0AF69C29F4540700B0EBE3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

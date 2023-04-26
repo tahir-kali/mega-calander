@@ -24,10 +24,10 @@ final class ViewController: UIViewController {
     private var selectedEndDate: Date = Date()
     private var numberOfMonts: Int?
     private var numberOfDays: Int?
-    private var currentDate: Date?
+    private var currentDate: Date = Date()
     private var allDates = [Date]()
     private var datesCounter = 0
-    
+    private var totalMonthsToPrint = 2
     private let weekdays = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ final class ViewController: UIViewController {
         setConstraints()
         setupActions()
         startDate = Date()
-        endDate = Calendar.current.date(byAdding: .month, value: 2, to: startDate!)
+        endDate = Calendar.current.date(byAdding: .month, value: totalMonthsToPrint, to: startDate!)
         countDays()
     }
  
@@ -184,26 +184,36 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
                 
                 cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),selectedStartDate.toString(),selectedEndDate.toString()]
-                if currentDate!.endOfMonth() == allDates[datesCounter] {
-                    currentDate = Calendar.current.date(byAdding: .day, value: 1, to: allDates[datesCounter])
+                if currentDate.endOfMonth() == allDates[datesCounter] {
+                    guard let currentDate = Calendar.current.date(byAdding: .day, value: 1, to: allDates[datesCounter]) else {
+                        return UICollectionViewCell()
+                    }
+                    self.currentDate = currentDate
+                    
                 }
                 datesCounter += 1
               
-            } else {
+            }else{
                 cell.data = ["","","",""]
             }
             
         }else{
             cell.data = ["","","",""]
+            
         }
+        
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeader
-            sectionHeader.label.text = self.currentDate?.toString(with: "MMMM, YYYY")
-            sectionHeader.label.font = UIFont.boldSystemFont(ofSize: 17.0)
+            guard let actualDate = Calendar.current.date(byAdding: .month, value: -(self.totalMonthsToPrint/(indexPath.section+1))+1, to: self.currentDate) else {
+            
+                return UICollectionReusableView()
+            }
+            sectionHeader.label.text = actualDate.toString(with: "MMMM, YYYY")
+            
             return sectionHeader
         } else {
             return UICollectionReusableView()
@@ -222,7 +232,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         guard let cellDate = cell.data?[0] else {return}
         // Get the current date from the cell
         let currentDate = cell.data?[1] ?? ""
-        
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
@@ -244,8 +253,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         startDateLabel.text = selectedStartDate.toString()
         endDateLabel.text = selectedEndDate.toString()
-        //cell.data = [cellDate, currentDateObj.toString(),selectedStartDate.toString(),selectedEndDate.toString()]
         countDays()
+        
     }
 
 }

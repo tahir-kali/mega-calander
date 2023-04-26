@@ -13,6 +13,7 @@ class SectionHeader: UICollectionReusableView {
 
      override init(frame: CGRect) {
          super.init(frame: frame)
+         label.font = UIFont.boldSystemFont(ofSize: 17.0)
          addSubview(label)
          label.snp.makeConstraints {
              $0.edges.equalToSuperview().inset(20)

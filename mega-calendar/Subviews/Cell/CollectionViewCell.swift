@@ -41,7 +41,11 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     
     func formatCells (data: [String]){
-        if(data == ["","","",""]) {return }
+        if(data == ["","","",""]) {
+            resetCellFormats()
+            return
+            
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
          let cD = data[1]
@@ -82,8 +86,8 @@ final class CollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 20
     }
     func formatCellSecondary(){
-        self.backgroundColor = .lightGray
-        titleLabel.textColor = .white
+        self.backgroundColor = UIColor(red:0.65,green:0,blue:1,alpha:0.2)
+        titleLabel.textColor = .black
         self.layer.cornerRadius = 20
     }
     func resetCellFormats(){
