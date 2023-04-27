@@ -20,14 +20,14 @@ final class ViewController: UIViewController {
     private lazy var weekDaysCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var startDate: Date?
     private var endDate: Date?
-    private var selectedStartDate: Date = Date()
-    private var selectedEndDate: Date = Date()
+    private var selectedStartDate: Date?
+    private var selectedEndDate: Date?
     private var numberOfMonts: Int?
     private var numberOfDays: Int?
     private var currentDate: Date = Date()
     private var allDates = [Date]()
     private var datesCounter = 0
-    private var totalMonthsToPrint = 2
+    private var totalMonthsToPrint = 11
     private let weekdays = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
     
     override func viewDidLoad() {
@@ -36,7 +36,9 @@ final class ViewController: UIViewController {
         setupViews()
         setConstraints()
         setupActions()
-        startDate = Date()
+        var dateComponent = DateComponents(year:2023,month:1,day:1)
+        
+        startDate = Calendar(identifier: .gregorian).date(from: dateComponent)
         endDate = Calendar.current.date(byAdding: .month, value: totalMonthsToPrint, to: startDate!)
         countDays()
     }
@@ -61,8 +63,6 @@ final class ViewController: UIViewController {
         topView.addSubview(endDateLabel)
         titleLabel.textAlignment = .center
         titleLabel.text = "Даты поездки"
-        startDateLabel.text = selectedStartDate.toString()
-        endDateLabel.text = selectedEndDate.toString()
         formatTopLabels()
         view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         topView.backgroundColor = .gray.withAlphaComponent(0.3)
@@ -182,8 +182,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let allDatesLength = allDates.count
         if(allDatesLength > datesCounter){
             if (allDates[datesCounter].dayNumberOfWeek() ?? 1) - 1 == (indexPath.row + 1) % 7 {
-                
-                cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),selectedStartDate.toString(),selectedEndDate.toString()]
+                let sDate = selectedStartDate?.toString() ?? ""
+                let eDate = selectedEndDate?.toString() ?? ""
+                cell.data  = ["\(allDates[datesCounter].get(.day))",allDates[datesCounter].toString(),sDate,eDate]
                 if currentDate.endOfMonth() == allDates[datesCounter] {
                     guard let currentDate = Calendar.current.date(byAdding: .day, value: 1, to: allDates[datesCounter]) else {
                         return UICollectionViewCell()
@@ -231,32 +232,42 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
         guard let cellDate = cell.data?[0] else {return}
         // Get the current date from the cell
+        
         let currentDate = cell.data?[1] ?? ""
         // Convert the currentDate string to a Date object
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
-        guard let currentDateObj = dateFormatter.date(from: currentDate) else {
-            print("exited code")
+        let currentDateObj = dateFormatter.date(from: currentDate)!
+        if(selectedStartDate != nil && selectedEndDate != nil){
+            selectedStartDate = currentDateObj
+            selectedEndDate = nil
             return
         }
-        
+        if(selectedStartDate == nil){
+            selectedStartDate = currentDateObj
+            return
+        }
+        if(selectedEndDate == nil){
+            selectedEndDate = currentDateObj
+            return
+        }
         // Check if the currentDate is less than startDate
-        if currentDateObj < selectedStartDate {
+        if currentDateObj < selectedStartDate! {
             selectedStartDate = currentDateObj
             print("set1")
-        } else if currentDateObj > selectedStartDate && currentDateObj < selectedEndDate {
+        } else if currentDateObj > selectedStartDate! && currentDateObj < selectedEndDate! {
             selectedEndDate = currentDateObj
             print("set2")
-        } else if currentDateObj > selectedStartDate && currentDateObj > selectedEndDate {
+        } else if currentDateObj > selectedStartDate! && currentDateObj > selectedEndDate! {
             selectedEndDate = currentDateObj
             print("set3")
         }
-        startDateLabel.text = selectedStartDate.toString()
-        endDateLabel.text = selectedEndDate.toString()
+        startDateLabel.text = selectedStartDate?.toString()
+        endDateLabel.text = selectedEndDate?.toString()
         countDays()
         
     }
-
+    
 }
 
 extension Calendar {
